@@ -11,6 +11,9 @@
 WarriorEntity::WarriorEntity(bool owner)
 {
     m_owner = owner;
+    m_hp = 1000;
+    m_attack = 1000;
+    m_orgHp = m_hp;
 }
 
 void WarriorEntity::draw(unsigned int i, unsigned int j, sf::Texture &army, sf::RenderWindow &window)
@@ -27,4 +30,19 @@ void WarriorEntity::draw(unsigned int i, unsigned int j, sf::Texture &army, sf::
     }
     warriorSprite.setPosition(i * 100, j * 100);
     window.draw(warriorSprite);
+}
+
+bool WarriorEntity::move(int oldX, int oldY, int newX, int newY)
+{
+    if(oldX - 1 <= newX && oldY - 1 <= newY && newX <= oldX + 1 && newY <= oldY + 1)
+        return true;
+    return false;
+}
+
+bool WarriorEntity::attack(int x, int y, Entity*** map)
+{
+    if(map[x][y] != nullptr && map[x][y]->getOwner() != this->getOwner())
+    {
+        map[x][y]->setHP(map[x][y]->getHP() - m_attack);
+    }
 }

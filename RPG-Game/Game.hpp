@@ -54,11 +54,13 @@ private:
     sf::Texture army;
     
     bool m_turn;
+    bool m_hasAttacked;
+    bool m_hasMoved;
     Entity*** map;
     
     Entity* selected;
-    unsigned selectedPosX;
-    unsigned selectedPosY;
+    int selectedPosX;
+    int selectedPosY;
 };
 
 #endif /* Game_hpp */

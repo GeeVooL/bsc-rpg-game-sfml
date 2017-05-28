@@ -17,8 +17,8 @@ class ArcherEntity : public Entity
 public:
     ArcherEntity(bool owner);
     virtual void draw(unsigned i, unsigned j, sf::Texture &army, sf::RenderWindow &window) override;
-    virtual bool move(unsigned oldX, unsigned oldY, unsigned newX, unsigned newY) = 0;
-private:
+    virtual bool move(int oldX, int oldY, int newX, int newY) override;
+    virtual bool attack(int x, int y, Entity*** map) override;
 };
 
 #endif /* ArcherEntity_hpp */

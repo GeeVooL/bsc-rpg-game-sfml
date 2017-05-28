@@ -18,6 +18,10 @@ Entity*** map = nullptr;
 Game::Game() : bar(sf::Vector2f(global::W_WIDTH, 200))
 {
     selected = nullptr;
+    m_turn = global::ORANGE;
+    m_hasMoved = 0;
+    m_hasAttacked = 0;
+    
     backgroundTile.loadFromFile(resourcePath() + "grassTile.png");
     backgroundTile.setRepeated(true);
     
@@ -112,14 +116,14 @@ void Game::run()
             // Mouse clicked - left
             if (event.type == sf::Event::MouseButtonPressed)
             {
+                int positionX = event.mouseButton.x / 100;
+                int positionY = event.mouseButton.y / 100;
+                
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
                     if(event.mouseButton.y <= global::W_HEIGHT - 200)
                     {
-                        int positionX = event.mouseButton.x / 100;
-                        int positionY = event.mouseButton.y / 100;
-                    
-                        if(selected == nullptr && map[positionX][positionY] != nullptr)
+                        if(map[positionX][positionY] != nullptr)
                         {
                             if(map[positionX][positionY]->getOwner() == m_turn)
                             {
@@ -128,13 +132,14 @@ void Game::run()
                                 selectedPosY = positionY;
                             }
                         }
-                        else
+                        else if (selected != nullptr)
                         {
-                            if(map[positionX][positionY] == nullptr && selected->move(selectedPosX, selectedPosY, positionX, positionY))
+                            if(!m_hasMoved && selected->getOwner() == m_turn && map[positionX][positionY] == nullptr && selected->move(selectedPosX, selectedPosY, positionX, positionY))
                             {
                                 map[positionX][positionY] = selected;
                                 map[selectedPosX][selectedPosY] = nullptr;
                                 selected = nullptr;
+                                m_hasMoved = 1;
                             }
                         }
                     
@@ -142,7 +147,15 @@ void Game::run()
                     else if (event.mouseButton.x > 512 && event.mouseButton.x < 688 && event.mouseButton.y > 862 && event.mouseButton.y < 938)
                     {
                         m_turn = !m_turn;
+                        m_hasMoved = 0;
+                        m_hasAttacked = 0;
                     }
+                }
+                else if (event.mouseButton.button == sf::Mouse::Right)
+                {
+                    if(selected != nullptr && !m_hasAttacked && map[positionX][positionY] != selected)
+                        if(selected->attack(positionX, positionY, map))
+                            m_hasAttacked = 1;
                 }
             }
         }
@@ -210,7 +223,17 @@ void Game::drawMap(sf::RenderWindow &window)
         for(int j = 0; j < global::size; j++)
         {
             if(map[i][j] != nullptr)
-                map[i][j]->draw(i, j, army, window);
+            {
+                if(map[i][j]->getHP() <= 0)
+                {
+                    delete map[i][j];
+                    map[i][j] = nullptr;
+                }
+                else
+                {
+                    map[i][j]->draw(i, j, army, window);
+                }
+            }
         }
     }
 }

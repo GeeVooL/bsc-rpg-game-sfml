@@ -13,22 +13,17 @@ unsigned Entity::getHP()
     return m_hp;
 }
 
-unsigned Entity::getRange()
-{
-    return m_range;
-}
-
 unsigned Entity::getAttack()
 {
     return m_attack;
 }
 
-unsigned Entity::getDistance()
-{
-    return m_distance;
-}
-
 bool Entity::getOwner()
 {
     return m_owner;
+}
+
+void Entity::setHP(unsigned hp)
+{
+    m_hp = hp;
 }
