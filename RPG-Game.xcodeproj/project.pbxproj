@@ -7,24 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		90408CB91ED468A700884700 /* nextTurnButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 90408CB81ED468A700884700 /* nextTurnButton.png */; };
+		90408CBB1ED4CB9600884700 /* saveButton.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90408CBA1ED4CB9600884700 /* saveButton.jpg */; };
 		9060D62F1EC3238500DEB872 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9060D62E1EC3238500DEB872 /* ResourcePath.mm */; };
 		9060D6321EC3238500DEB872 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9060D6311EC3238500DEB872 /* main.cpp */; };
-		9060D6351EC3238500DEB872 /* cute_image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9060D6341EC3238500DEB872 /* cute_image.jpg */; };
-		9060D6371EC3238500DEB872 /* nice_music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = 9060D6361EC3238500DEB872 /* nice_music.ogg */; };
 		9060D6391EC3238500DEB872 /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9060D6381EC3238500DEB872 /* sansation.ttf */; };
 		9060D63B1EC3238500DEB872 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 9060D63A1EC3238500DEB872 /* icon.png */; };
+		9060D6431EC329B000DEB872 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9060D6411EC329B000DEB872 /* Game.cpp */; };
+		9060D64F1EC3550D00DEB872 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9060D64D1EC3550D00DEB872 /* Entity.cpp */; };
+		9060D6521EC3555400DEB872 /* ArcherEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9060D6501EC3555400DEB872 /* ArcherEntity.cpp */; };
+		9060D6551EC3556600DEB872 /* WarriorEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9060D6531EC3556600DEB872 /* WarriorEntity.cpp */; };
+		9060D6581EC3557600DEB872 /* KnightEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9060D6561EC3557600DEB872 /* KnightEntity.cpp */; };
+		9060D65B1EC3558F00DEB872 /* MageEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9060D6591EC3558F00DEB872 /* MageEntity.cpp */; };
+		9060D65E1EC355FA00DEB872 /* CavalierEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9060D65C1EC355FA00DEB872 /* CavalierEntity.cpp */; };
+		9060D6601EC61E1400DEB872 /* grassTile.png in Resources */ = {isa = PBXBuildFile; fileRef = 9060D65F1EC61E1400DEB872 /* grassTile.png */; };
+		9060D6621EC68A5100DEB872 /* themeSong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9060D6611EC68A5100DEB872 /* themeSong.mp3 */; };
+		906F3D811ED5A4A400E95C41 /* army.png in Resources */ = {isa = PBXBuildFile; fileRef = 906F3D801ED5A4A400E95C41 /* army.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		90408CB81ED468A700884700 /* nextTurnButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextTurnButton.png; sourceTree = "<group>"; };
+		90408CBA1ED4CB9600884700 /* saveButton.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = saveButton.jpg; sourceTree = "<group>"; };
 		9060D6291EC3238500DEB872 /* RPG-Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RPG-Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9060D62D1EC3238500DEB872 /* RPG-Game-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RPG-Game-Info.plist"; sourceTree = "<group>"; };
 		9060D62E1EC3238500DEB872 /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
 		9060D6301EC3238500DEB872 /* ResourcePath.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ResourcePath.hpp; sourceTree = "<group>"; };
 		9060D6311EC3238500DEB872 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		9060D6341EC3238500DEB872 /* cute_image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cute_image.jpg; sourceTree = "<group>"; };
-		9060D6361EC3238500DEB872 /* nice_music.ogg */ = {isa = PBXFileReference; lastKnownFileType = file; path = nice_music.ogg; sourceTree = "<group>"; };
 		9060D6381EC3238500DEB872 /* sansation.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sansation.ttf; sourceTree = "<group>"; };
 		9060D63A1EC3238500DEB872 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		9060D6411EC329B000DEB872 /* Game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
+		9060D6421EC329B000DEB872 /* Game.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
+		9060D64D1EC3550D00DEB872 /* Entity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
+		9060D64E1EC3550D00DEB872 /* Entity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
+		9060D6501EC3555400DEB872 /* ArcherEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ArcherEntity.cpp; sourceTree = "<group>"; };
+		9060D6511EC3555400DEB872 /* ArcherEntity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ArcherEntity.hpp; sourceTree = "<group>"; };
+		9060D6531EC3556600DEB872 /* WarriorEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WarriorEntity.cpp; sourceTree = "<group>"; };
+		9060D6541EC3556600DEB872 /* WarriorEntity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WarriorEntity.hpp; sourceTree = "<group>"; };
+		9060D6561EC3557600DEB872 /* KnightEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = KnightEntity.cpp; sourceTree = "<group>"; };
+		9060D6571EC3557600DEB872 /* KnightEntity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = KnightEntity.hpp; sourceTree = "<group>"; };
+		9060D6591EC3558F00DEB872 /* MageEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MageEntity.cpp; sourceTree = "<group>"; };
+		9060D65A1EC3558F00DEB872 /* MageEntity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MageEntity.hpp; sourceTree = "<group>"; };
+		9060D65C1EC355FA00DEB872 /* CavalierEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CavalierEntity.cpp; sourceTree = "<group>"; };
+		9060D65D1EC355FA00DEB872 /* CavalierEntity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CavalierEntity.hpp; sourceTree = "<group>"; };
+		9060D65F1EC61E1400DEB872 /* grassTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grassTile.png; sourceTree = "<group>"; };
+		9060D6611EC68A5100DEB872 /* themeSong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = themeSong.mp3; sourceTree = "<group>"; };
+		906F3D801ED5A4A400E95C41 /* army.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = army.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +87,20 @@
 				9060D62E1EC3238500DEB872 /* ResourcePath.mm */,
 				9060D6301EC3238500DEB872 /* ResourcePath.hpp */,
 				9060D6311EC3238500DEB872 /* main.cpp */,
+				9060D6411EC329B000DEB872 /* Game.cpp */,
+				9060D6421EC329B000DEB872 /* Game.hpp */,
+				9060D64D1EC3550D00DEB872 /* Entity.cpp */,
+				9060D64E1EC3550D00DEB872 /* Entity.hpp */,
+				9060D6501EC3555400DEB872 /* ArcherEntity.cpp */,
+				9060D6511EC3555400DEB872 /* ArcherEntity.hpp */,
+				9060D6531EC3556600DEB872 /* WarriorEntity.cpp */,
+				9060D6541EC3556600DEB872 /* WarriorEntity.hpp */,
+				9060D6561EC3557600DEB872 /* KnightEntity.cpp */,
+				9060D6571EC3557600DEB872 /* KnightEntity.hpp */,
+				9060D6591EC3558F00DEB872 /* MageEntity.cpp */,
+				9060D65A1EC3558F00DEB872 /* MageEntity.hpp */,
+				9060D65C1EC355FA00DEB872 /* CavalierEntity.cpp */,
+				9060D65D1EC355FA00DEB872 /* CavalierEntity.hpp */,
 				9060D6331EC3238500DEB872 /* Resources */,
 				9060D62C1EC3238500DEB872 /* Supporting Files */,
 			);
@@ -77,8 +118,11 @@
 		9060D6331EC3238500DEB872 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9060D6341EC3238500DEB872 /* cute_image.jpg */,
-				9060D6361EC3238500DEB872 /* nice_music.ogg */,
+				906F3D801ED5A4A400E95C41 /* army.png */,
+				90408CBA1ED4CB9600884700 /* saveButton.jpg */,
+				90408CB81ED468A700884700 /* nextTurnButton.png */,
+				9060D6611EC68A5100DEB872 /* themeSong.mp3 */,
+				9060D65F1EC61E1400DEB872 /* grassTile.png */,
 				9060D6381EC3238500DEB872 /* sansation.ttf */,
 				9060D63A1EC3238500DEB872 /* icon.png */,
 			);
@@ -144,10 +188,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90408CBB1ED4CB9600884700 /* saveButton.jpg in Resources */,
+				9060D6621EC68A5100DEB872 /* themeSong.mp3 in Resources */,
+				9060D6601EC61E1400DEB872 /* grassTile.png in Resources */,
 				9060D63B1EC3238500DEB872 /* icon.png in Resources */,
+				906F3D811ED5A4A400E95C41 /* army.png in Resources */,
 				9060D6391EC3238500DEB872 /* sansation.ttf in Resources */,
-				9060D6371EC3238500DEB872 /* nice_music.ogg in Resources */,
-				9060D6351EC3238500DEB872 /* cute_image.jpg in Resources */,
+				90408CB91ED468A700884700 /* nextTurnButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,8 +221,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9060D6431EC329B000DEB872 /* Game.cpp in Sources */,
+				9060D64F1EC3550D00DEB872 /* Entity.cpp in Sources */,
+				9060D6521EC3555400DEB872 /* ArcherEntity.cpp in Sources */,
+				9060D6551EC3556600DEB872 /* WarriorEntity.cpp in Sources */,
 				9060D6321EC3238500DEB872 /* main.cpp in Sources */,
+				9060D6581EC3557600DEB872 /* KnightEntity.cpp in Sources */,
+				9060D65B1EC3558F00DEB872 /* MageEntity.cpp in Sources */,
 				9060D62F1EC3238500DEB872 /* ResourcePath.mm in Sources */,
+				9060D65E1EC355FA00DEB872 /* CavalierEntity.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +363,7 @@
 				9060D6401EC3238500DEB872 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
