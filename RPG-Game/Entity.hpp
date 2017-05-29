@@ -16,18 +16,22 @@ class Entity
 {
 public:
     virtual ~Entity() {};
-    unsigned getHP();
+    int getHP();
     void setHP(unsigned hp);
     unsigned getAttack();
+    void resetAttack();
     unsigned getRange();
     bool getOwner();
     virtual void draw(unsigned i, unsigned j, sf::Texture &army, sf::RenderWindow &window) = 0;
-    virtual bool move(int oldX, int oldY, int newX, int newY) = 0;
-    virtual bool attack(int x, int y, Entity*** map) = 0;
+    virtual bool move(int oldX, int oldY, int newX, int newY, Entity*** map) = 0;
+    virtual bool attack(int posX, int posY, int targetX, int targetY, Entity*** map) = 0;
 protected:
-    unsigned m_hp;
+    sf::RectangleShape hpBar;
+    
+    int m_hp;
     unsigned m_orgHp;
     unsigned m_attack;
+    unsigned m_orgAttack;
     bool m_owner;
     
 };

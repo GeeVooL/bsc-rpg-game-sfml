@@ -13,6 +13,9 @@ const float global::W_WIDTH = 800;
 const unsigned global::size = 8;
 const bool global::GREEN = 1;
 const bool global::ORANGE = 0;
+unsigned global::greenAmount = 0;
+unsigned global::orangeAmount = 0;
+
 Entity*** map = nullptr;
 
 Game::Game() : bar(sf::Vector2f(global::W_WIDTH, 200))
@@ -27,6 +30,10 @@ Game::Game() : bar(sf::Vector2f(global::W_WIDTH, 200))
     
     bar.setPosition(0, global::W_HEIGHT-200);
     bar.setFillColor(sf::Color(133, 103, 39));
+    
+    playerTurn.setPosition(global::W_WIDTH / 2.0 - 37.5, (global::W_HEIGHT - 200) + 200 / 2.0 - 37.5);
+    playerTurn.setSize(sf::Vector2f(75.0, 75.0));
+    playerTurn.setFillColor(sf::Color(255,128,0));
     
     nextTurnButton.loadFromFile(resourcePath() + "nextTurnButton.png");
     
@@ -91,13 +98,6 @@ void Game::run()
     }
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
     
-    
-    // Load a music to play
-    //sf::Music music;
-    //if (!music.openFromFile(resourcePath() + "themeSong.mp3")) {
-    //    return EXIT_FAILURE;
-    //}
-    
     // Play the music
     //music.play();
     
@@ -116,8 +116,8 @@ void Game::run()
             // Mouse clicked - left
             if (event.type == sf::Event::MouseButtonPressed)
             {
-                int positionX = event.mouseButton.x / 100;
-                int positionY = event.mouseButton.y / 100;
+                int positionX = event.mouseButton.x / (100.0 * 8.0 / global::size);
+                int positionY = event.mouseButton.y / (100.0 * 8.0 / global::size);
                 
                 if (event.mouseButton.button == sf::Mouse::Left)
                 {
@@ -134,7 +134,7 @@ void Game::run()
                         }
                         else if (selected != nullptr)
                         {
-                            if(!m_hasMoved && selected->getOwner() == m_turn && map[positionX][positionY] == nullptr && selected->move(selectedPosX, selectedPosY, positionX, positionY))
+                            if(!m_hasMoved && selected->getOwner() == m_turn && map[positionX][positionY] == nullptr && selected->move(selectedPosX, selectedPosY, positionX, positionY, map))
                             {
                                 map[positionX][positionY] = selected;
                                 map[selectedPosX][selectedPosY] = nullptr;
@@ -146,6 +146,17 @@ void Game::run()
                     }
                     else if (event.mouseButton.x > 512 && event.mouseButton.x < 688 && event.mouseButton.y > 862 && event.mouseButton.y < 938)
                     {
+                        for(int i = 0; i < global::size; i++)
+                        {
+                            for(int j = 0; j < global::size; j++)
+                            {
+                                if(map[i][j] != nullptr)
+                                {
+                                    map[i][j]->resetAttack();
+                                }
+                            }
+                        }
+                        
                         m_turn = !m_turn;
                         m_hasMoved = 0;
                         m_hasAttacked = 0;
@@ -154,7 +165,7 @@ void Game::run()
                 else if (event.mouseButton.button == sf::Mouse::Right)
                 {
                     if(selected != nullptr && !m_hasAttacked && map[positionX][positionY] != selected)
-                        if(selected->attack(positionX, positionY, map))
+                        if(selected->attack(selectedPosX, selectedPosY, positionX, positionY, map))
                             m_hasAttacked = 1;
                 }
             }
@@ -164,8 +175,18 @@ void Game::run()
         window.clear();
         
         // Render scene
-        render(window);
-        
+        if(global::greenAmount == 0)
+        {
+            renderWinner(window, global::ORANGE);
+        }
+        else if(global::orangeAmount == 0)
+        {
+            renderWinner(window, global::GREEN);
+        }
+        else
+        {
+            render(window);
+        }
         // Update the window
         window.display();
     }
@@ -195,6 +216,13 @@ void Game::drawMenu(sf::RenderWindow &window)
     nextTurnSprite.setOrigin(175 / 2.0, 75 / 2.0);
     nextTurnSprite.setPosition(global::W_WIDTH / 4.0 * 3.0, global::W_HEIGHT - 200 + (200 / 2.0));
     window.draw(nextTurnSprite);
+    
+    if(m_turn == global::ORANGE)
+        playerTurn.setFillColor(sf::Color(255,128,0));
+    else
+        playerTurn.setFillColor(sf::Color(0, 200, 0));
+    
+    window.draw(playerTurn);
 }
 
 void Game::drawFields(sf::RenderWindow &window)
@@ -226,6 +254,11 @@ void Game::drawMap(sf::RenderWindow &window)
             {
                 if(map[i][j]->getHP() <= 0)
                 {
+                    if(map[i][j]->getOwner() == global::ORANGE)
+                        global::orangeAmount--;
+                    else
+                        global::greenAmount--;
+
                     delete map[i][j];
                     map[i][j] = nullptr;
                 }
@@ -236,4 +269,25 @@ void Game::drawMap(sf::RenderWindow &window)
             }
         }
     }
+}
+
+void Game::renderWinner(sf::RenderWindow &window, bool winner)
+{
+    sf::Font font;
+    font.loadFromFile(resourcePath() + "sansation.ttf");
+    sf::Text winnerText;
+    winnerText.setFont(font);
+    winnerText.setCharacterSize(32);
+    winnerText.setFillColor(sf::Color(255,255,255));
+    
+    sf::FloatRect textRect = winnerText.getLocalBounds();
+    winnerText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top  + textRect.height / 2.0f);
+    winnerText.setPosition(global::W_WIDTH / 2.0f, global::W_HEIGHT / 2.0f);
+    
+    if(winner == global::ORANGE)
+        winnerText.setString("ORANGE wins");
+    else
+        winnerText.setString("GREEN wins");
+    
+    window.draw(winnerText);
 }

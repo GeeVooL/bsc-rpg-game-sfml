@@ -8,7 +8,7 @@
 
 #include "Entity.hpp"
 
-unsigned Entity::getHP()
+int Entity::getHP()
 {
     return m_hp;
 }
@@ -26,4 +26,9 @@ bool Entity::getOwner()
 void Entity::setHP(unsigned hp)
 {
     m_hp = hp;
+}
+
+void Entity::resetAttack()
+{
+    m_attack = m_orgAttack;
 }

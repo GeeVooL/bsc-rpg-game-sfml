@@ -27,6 +27,8 @@ namespace global
     extern const unsigned size;
     extern const bool GREEN;
     extern const bool ORANGE;
+    extern unsigned greenAmount;
+    extern unsigned orangeAmount;
 }
 
 class Game
@@ -39,6 +41,7 @@ public:
     void load();
 private:
     void render(sf::RenderWindow &window);
+    void renderWinner(sf::RenderWindow &window, bool winner);
     
     void drawBackground(sf::RenderWindow &window);
     void drawFields(sf::RenderWindow &window);
@@ -51,6 +54,7 @@ private:
     sf::Texture saveButton;
     sf::RectangleShape lineY;
     sf::RectangleShape lineX;
+    sf::RectangleShape playerTurn;
     sf::Texture army;
     
     bool m_turn;

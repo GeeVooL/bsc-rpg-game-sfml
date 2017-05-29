@@ -21,7 +21,6 @@
 		9060D65B1EC3558F00DEB872 /* MageEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9060D6591EC3558F00DEB872 /* MageEntity.cpp */; };
 		9060D65E1EC355FA00DEB872 /* CavalierEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9060D65C1EC355FA00DEB872 /* CavalierEntity.cpp */; };
 		9060D6601EC61E1400DEB872 /* grassTile.png in Resources */ = {isa = PBXBuildFile; fileRef = 9060D65F1EC61E1400DEB872 /* grassTile.png */; };
-		9060D6621EC68A5100DEB872 /* themeSong.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 9060D6611EC68A5100DEB872 /* themeSong.mp3 */; };
 		906F3D811ED5A4A400E95C41 /* army.png in Resources */ = {isa = PBXBuildFile; fileRef = 906F3D801ED5A4A400E95C41 /* army.png */; };
 /* End PBXBuildFile section */
 
@@ -50,7 +49,6 @@
 		9060D65C1EC355FA00DEB872 /* CavalierEntity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CavalierEntity.cpp; sourceTree = "<group>"; };
 		9060D65D1EC355FA00DEB872 /* CavalierEntity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CavalierEntity.hpp; sourceTree = "<group>"; };
 		9060D65F1EC61E1400DEB872 /* grassTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grassTile.png; sourceTree = "<group>"; };
-		9060D6611EC68A5100DEB872 /* themeSong.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = themeSong.mp3; sourceTree = "<group>"; };
 		906F3D801ED5A4A400E95C41 /* army.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = army.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,7 +119,6 @@
 				906F3D801ED5A4A400E95C41 /* army.png */,
 				90408CBA1ED4CB9600884700 /* saveButton.jpg */,
 				90408CB81ED468A700884700 /* nextTurnButton.png */,
-				9060D6611EC68A5100DEB872 /* themeSong.mp3 */,
 				9060D65F1EC61E1400DEB872 /* grassTile.png */,
 				9060D6381EC3238500DEB872 /* sansation.ttf */,
 				9060D63A1EC3238500DEB872 /* icon.png */,
@@ -189,7 +186,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				90408CBB1ED4CB9600884700 /* saveButton.jpg in Resources */,
-				9060D6621EC68A5100DEB872 /* themeSong.mp3 in Resources */,
 				9060D6601EC61E1400DEB872 /* grassTile.png in Resources */,
 				9060D63B1EC3238500DEB872 /* icon.png in Resources */,
 				906F3D811ED5A4A400E95C41 /* army.png in Resources */,
