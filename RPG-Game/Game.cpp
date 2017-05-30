@@ -10,7 +10,7 @@
 
 const float global::W_HEIGHT = 1000; // 800 map + 200 bar
 const float global::W_WIDTH = 800;
-const unsigned global::size = 8;
+unsigned global::size = 8;
 const bool global::GREEN = 1;
 const bool global::ORANGE = 0;
 unsigned global::greenAmount = 0;
@@ -169,6 +169,17 @@ void Game::run()
                             m_hasAttacked = 1;
                 }
             }
+            if(event.type == sf::Event::KeyPressed)
+            {
+                if(event.key.code == sf::Keyboard::S)
+                {
+                    save();
+                }
+                else if (event.key.code == sf::Keyboard::L)
+                {
+                    load();
+                }
+            }
         }
         
         // Clear screen
@@ -280,14 +291,141 @@ void Game::renderWinner(sf::RenderWindow &window, bool winner)
     winnerText.setCharacterSize(32);
     winnerText.setFillColor(sf::Color(255,255,255));
     
-    sf::FloatRect textRect = winnerText.getLocalBounds();
-    winnerText.setOrigin(textRect.left + textRect.width / 2.0f, textRect.top  + textRect.height / 2.0f);
-    winnerText.setPosition(global::W_WIDTH / 2.0f, global::W_HEIGHT / 2.0f);
-    
     if(winner == global::ORANGE)
         winnerText.setString("ORANGE wins");
     else
         winnerText.setString("GREEN wins");
     
+    sf::FloatRect textRect = winnerText.getLocalBounds();
+    winnerText.setOrigin(textRect.width / 2.0f, textRect.height / 2.0f);
+    winnerText.setPosition(global::W_WIDTH / 2.0f, global::W_HEIGHT / 2.0f);
+    
     window.draw(winnerText);
+}
+
+void Game::save()
+{
+    nlohmann::json output;
+    output["size"] = global::size;
+    output["turn"] = m_turn;
+    output["hasAttacked"] = m_hasAttacked;
+    output["hasMoved"] = m_hasMoved;
+    
+    int k = 0;
+    
+    for(int i = 0; i < global::size; i++)
+    {
+        for (int j = 0; j < global::size; j++)
+        {
+            if(map[i][j] != nullptr)
+            {
+                map[i][j]->toJson(output, k);
+            }
+            else
+            {
+                output[std::to_string(k)]["type"] = "null";
+            }
+            k++;
+        }
+    }
+    
+    std::fstream file("save.json", std::fstream::out | std::fstream::trunc);
+    if(!file.is_open())
+        throw 1;
+    file << std::setw(4) << output;
+    file.close();
+}
+
+void Game::load()
+{
+    std::fstream inStream("save.json", std::fstream::in);
+    nlohmann::json input;
+    inStream >> input;
+    inStream.close();
+    
+    for(int i = 0; i < global::size; i++)
+    {
+        for(int j = 0; j < global::size; j++)
+        {
+            if(map[i][j] != nullptr)
+            {
+                delete map[i][j];
+                map[i][j] = nullptr;
+            }
+        }
+    }
+    
+    global::orangeAmount = 0;
+    global::greenAmount = 0;
+    global::size = input["size"];
+    m_turn = input["turn"];
+    m_hasAttacked = input["hasAttacked"];
+    m_hasMoved = input["hasMoved"];
+    
+    int k = 0;
+    
+    for(int i = 0; i < global::size; i++)
+    {
+        for(int j = 0; j < global::size; j++)
+        {
+            if(input[std::to_string(k)]["type"] == "null")
+            {
+                map[i][j] = nullptr;
+            }
+            else if (input[std::to_string(k)]["type"] == "archer") {
+                map[i][j] = new ArcherEntity(
+                                             input[std::to_string(k)]["hp"],
+                                             input[std::to_string(k)]["orgHp"],
+                                             input[std::to_string(k)]["attack"],
+                                             input[std::to_string(k)]["orgAttack"],
+                                             input[std::to_string(k)]["owner"],
+                                             input[std::to_string(k)]["distance"]
+                                             );
+            }
+            else if (input[std::to_string(k)]["type"] == "warrior") {
+                map[i][j] = new WarriorEntity(
+                                              input[std::to_string(k)]["hp"],
+                                              input[std::to_string(k)]["orgHp"],
+                                              input[std::to_string(k)]["attack"],
+                                              input[std::to_string(k)]["orgAttack"],
+                                              input[std::to_string(k)]["owner"]
+                                              );
+            }
+            else if (input[std::to_string(k)]["type"] == "knight") {
+                map[i][j] = new KnightEntity(
+                                             input[std::to_string(k)]["hp"],
+                                             input[std::to_string(k)]["orgHp"],
+                                             input[std::to_string(k)]["attack"],
+                                             input[std::to_string(k)]["orgAttack"],
+                                             input[std::to_string(k)]["owner"]
+                                             );
+            }
+            else if (input[std::to_string(k)]["type"] == "mage") {
+                map[i][j] = new MageEntity(
+                                           input[std::to_string(k)]["hp"],
+                                           input[std::to_string(k)]["orgHp"],
+                                           input[std::to_string(k)]["attack"],
+                                           input[std::to_string(k)]["orgAttack"],
+                                           input[std::to_string(k)]["owner"],
+                                           input[std::to_string(k)]["distance"]
+                                           );
+            }
+            else if (input[std::to_string(k)]["type"] == "cavalier") {
+                map[i][j] = new CavalierEntity(
+                                               input[std::to_string(k)]["hp"],
+                                               input[std::to_string(k)]["orgHp"],
+                                               input[std::to_string(k)]["attack"],
+                                               input[std::to_string(k)]["orgAttack"],
+                                               input[std::to_string(k)]["owner"]
+                                               );
+            }
+            else
+            {
+                throw 3;
+            }
+            k++;
+        }
+    }
+    
+    inStream.close();
 }

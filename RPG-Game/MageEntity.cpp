@@ -15,6 +15,7 @@ MageEntity::MageEntity(bool owner)
     m_attack = 300;
     m_orgHp = m_hp;
     m_orgAttack = m_attack;
+    m_distance = 6;
     
     if(m_owner == global::ORANGE)
         global::orangeAmount++;
@@ -23,6 +24,25 @@ MageEntity::MageEntity(bool owner)
     
     hpBar.setSize(sf::Vector2f(100 * 8.0 / global::size, 10));
     hpBar.setFillColor(sf::Color(0, 220, 0));
+}
+
+MageEntity::MageEntity(int hp, unsigned orgHp, unsigned attack, unsigned orgAttack, bool owner, int distance)
+{
+    m_owner = owner;
+    m_hp = hp;
+    m_attack = attack;
+    m_orgHp = orgHp;
+    m_orgAttack = orgAttack;
+    m_distance = distance;
+    
+    if(m_owner == global::ORANGE)
+        global::orangeAmount++;
+    else
+        global::greenAmount++;
+    
+    hpBar.setSize(sf::Vector2f(100 * 8.0 / global::size, 10));
+    hpBar.setFillColor(sf::Color(0, 220, 0));
+    
 }
 
 void MageEntity::draw(unsigned int i, unsigned int j, sf::Texture &army, sf::RenderWindow &window)
@@ -65,6 +85,9 @@ bool MageEntity::attack(int posX, int posY, int targetX, int targetY, Entity*** 
         }
     }
     
+    if(sqrt((targetX - posX)*(targetX - posX) + (targetY - posY)*(targetY - posY)) > m_distance)
+        return false;
+    
     bool att = 0;
     
     if(map[targetX][targetY] != nullptr && map[targetX][targetY]->getOwner() != this->getOwner())
@@ -96,4 +119,15 @@ bool MageEntity::attack(int posX, int posY, int targetX, int targetY, Entity*** 
     if(att)
         return true;
     return false;
+}
+
+void MageEntity::toJson(nlohmann::json &output, int k)
+{
+    output[std::to_string(k)]["type"] = "mage";
+    output[std::to_string(k)]["hp"] = m_hp;
+    output[std::to_string(k)]["orgHp"] = m_orgHp;
+    output[std::to_string(k)]["attack"] = m_attack;
+    output[std::to_string(k)]["orgAttack"] = m_orgAttack;
+    output[std::to_string(k)]["owner"] = m_owner;
+    output[std::to_string(k)]["distance"] = m_distance;
 }

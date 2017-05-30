@@ -16,9 +16,11 @@ class ArcherEntity : public Entity
 {
 public:
     ArcherEntity(bool owner);
+    ArcherEntity(int hp, unsigned orgHp, unsigned attack, unsigned orgAttack, bool owner, int distance);
     virtual void draw(unsigned i, unsigned j, sf::Texture &army, sf::RenderWindow &window) override;
     virtual bool move(int oldX, int oldY, int newX, int newY, Entity*** map) override;
     virtual bool attack(int posX, int posY, int targetX, int targetY, Entity*** map) override;
+    virtual void toJson(nlohmann::json &output, int k) override;
 private:
     int m_distance;
 };

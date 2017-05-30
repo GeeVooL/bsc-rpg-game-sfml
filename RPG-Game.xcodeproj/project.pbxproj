@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		90408CB91ED468A700884700 /* nextTurnButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 90408CB81ED468A700884700 /* nextTurnButton.png */; };
-		90408CBB1ED4CB9600884700 /* saveButton.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 90408CBA1ED4CB9600884700 /* saveButton.jpg */; };
 		9060D62F1EC3238500DEB872 /* ResourcePath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9060D62E1EC3238500DEB872 /* ResourcePath.mm */; };
 		9060D6321EC3238500DEB872 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9060D6311EC3238500DEB872 /* main.cpp */; };
 		9060D6391EC3238500DEB872 /* sansation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9060D6381EC3238500DEB872 /* sansation.ttf */; };
@@ -22,11 +21,11 @@
 		9060D65E1EC355FA00DEB872 /* CavalierEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9060D65C1EC355FA00DEB872 /* CavalierEntity.cpp */; };
 		9060D6601EC61E1400DEB872 /* grassTile.png in Resources */ = {isa = PBXBuildFile; fileRef = 9060D65F1EC61E1400DEB872 /* grassTile.png */; };
 		906F3D811ED5A4A400E95C41 /* army.png in Resources */ = {isa = PBXBuildFile; fileRef = 906F3D801ED5A4A400E95C41 /* army.png */; };
+		906F3D831EDDA46200E95C41 /* json.hpp in Sources */ = {isa = PBXBuildFile; fileRef = 906F3D821EDDA46200E95C41 /* json.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		90408CB81ED468A700884700 /* nextTurnButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nextTurnButton.png; sourceTree = "<group>"; };
-		90408CBA1ED4CB9600884700 /* saveButton.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = saveButton.jpg; sourceTree = "<group>"; };
 		9060D6291EC3238500DEB872 /* RPG-Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RPG-Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9060D62D1EC3238500DEB872 /* RPG-Game-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RPG-Game-Info.plist"; sourceTree = "<group>"; };
 		9060D62E1EC3238500DEB872 /* ResourcePath.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ResourcePath.mm; sourceTree = "<group>"; };
@@ -50,6 +49,7 @@
 		9060D65D1EC355FA00DEB872 /* CavalierEntity.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CavalierEntity.hpp; sourceTree = "<group>"; };
 		9060D65F1EC61E1400DEB872 /* grassTile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = grassTile.png; sourceTree = "<group>"; };
 		906F3D801ED5A4A400E95C41 /* army.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = army.png; sourceTree = "<group>"; };
+		906F3D821EDDA46200E95C41 /* json.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = json.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +99,7 @@
 				9060D65A1EC3558F00DEB872 /* MageEntity.hpp */,
 				9060D65C1EC355FA00DEB872 /* CavalierEntity.cpp */,
 				9060D65D1EC355FA00DEB872 /* CavalierEntity.hpp */,
+				906F3D821EDDA46200E95C41 /* json.hpp */,
 				9060D6331EC3238500DEB872 /* Resources */,
 				9060D62C1EC3238500DEB872 /* Supporting Files */,
 			);
@@ -117,7 +118,6 @@
 			isa = PBXGroup;
 			children = (
 				906F3D801ED5A4A400E95C41 /* army.png */,
-				90408CBA1ED4CB9600884700 /* saveButton.jpg */,
 				90408CB81ED468A700884700 /* nextTurnButton.png */,
 				9060D65F1EC61E1400DEB872 /* grassTile.png */,
 				9060D6381EC3238500DEB872 /* sansation.ttf */,
@@ -185,7 +185,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90408CBB1ED4CB9600884700 /* saveButton.jpg in Resources */,
 				9060D6601EC61E1400DEB872 /* grassTile.png in Resources */,
 				9060D63B1EC3238500DEB872 /* icon.png in Resources */,
 				906F3D811ED5A4A400E95C41 /* army.png in Resources */,
@@ -220,6 +219,7 @@
 				9060D6431EC329B000DEB872 /* Game.cpp in Sources */,
 				9060D64F1EC3550D00DEB872 /* Entity.cpp in Sources */,
 				9060D6521EC3555400DEB872 /* ArcherEntity.cpp in Sources */,
+				906F3D831EDDA46200E95C41 /* json.hpp in Sources */,
 				9060D6551EC3556600DEB872 /* WarriorEntity.cpp in Sources */,
 				9060D6321EC3238500DEB872 /* main.cpp in Sources */,
 				9060D6581EC3557600DEB872 /* KnightEntity.cpp in Sources */,

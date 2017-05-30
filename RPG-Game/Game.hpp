@@ -12,6 +12,8 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <fstream>
+#include "json.hpp"
 #include "ResourcePath.hpp"
 #include "Entity.hpp"
 #include "ArcherEntity.hpp"
@@ -24,7 +26,7 @@ namespace global
 {
     extern const float W_HEIGHT; // 800 map + 200 bar
     extern const float W_WIDTH;
-    extern const unsigned size;
+    extern unsigned size;
     extern const bool GREEN;
     extern const bool ORANGE;
     extern unsigned greenAmount;

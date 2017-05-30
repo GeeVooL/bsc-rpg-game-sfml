@@ -25,6 +25,24 @@ CavalierEntity::CavalierEntity(bool owner)
     hpBar.setFillColor(sf::Color(0, 220, 0));
 }
 
+CavalierEntity::CavalierEntity(int hp, unsigned orgHp, unsigned attack, unsigned orgAttack, bool owner)
+{
+    m_owner = owner;
+    m_hp = hp;
+    m_attack = attack;
+    m_orgHp = orgHp;
+    m_orgAttack = orgAttack;
+    
+    if(m_owner == global::ORANGE)
+        global::orangeAmount++;
+    else
+        global::greenAmount++;
+    
+    hpBar.setSize(sf::Vector2f(100 * 8.0 / global::size, 10));
+    hpBar.setFillColor(sf::Color(0, 220, 0));
+    
+}
+
 void CavalierEntity::draw(unsigned int i, unsigned int j, sf::Texture &army, sf::RenderWindow &window)
 {
     sf::Sprite cavalierSprite;
@@ -97,4 +115,14 @@ bool CavalierEntity::attack(int posX, int posY, int targetX, int targetY, Entity
         return true;
     }
     return false;
+}
+
+void CavalierEntity::toJson(nlohmann::json &output, int k)
+{
+    output[std::to_string(k)]["type"] = "cavalier";
+    output[std::to_string(k)]["hp"] = m_hp;
+    output[std::to_string(k)]["orgHp"] = m_orgHp;
+    output[std::to_string(k)]["attack"] = m_attack;
+    output[std::to_string(k)]["orgAttack"] = m_orgAttack;
+    output[std::to_string(k)]["owner"] = m_owner;
 }

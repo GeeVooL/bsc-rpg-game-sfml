@@ -27,6 +27,25 @@ ArcherEntity::ArcherEntity(bool owner)
     hpBar.setFillColor(sf::Color(0, 220, 0));
 }
 
+ArcherEntity::ArcherEntity(int hp, unsigned orgHp, unsigned attack, unsigned orgAttack, bool owner, int distance)
+{
+    m_owner = owner;
+    m_hp = hp;
+    m_attack = attack;
+    m_distance = distance;
+    m_orgHp = orgHp;
+    m_orgAttack = orgAttack;
+    
+    if(m_owner == global::ORANGE)
+        global::orangeAmount++;
+    else
+        global::greenAmount++;
+    
+    hpBar.setSize(sf::Vector2f(100 * 8.0 / global::size, 10));
+    hpBar.setFillColor(sf::Color(0, 220, 0));
+
+}
+
 void ArcherEntity::draw(unsigned int i, unsigned int j, sf::Texture &army, sf::RenderWindow &window)
 {
     sf::Sprite archerSprite;
@@ -65,4 +84,15 @@ bool ArcherEntity::attack(int posX, int posY, int targetX, int targetY, Entity**
         return true;
     }
     return false;
+}
+
+void ArcherEntity::toJson(nlohmann::json &output, int k)
+{
+    output[std::to_string(k)]["type"] = "archer";
+    output[std::to_string(k)]["hp"] = m_hp;
+    output[std::to_string(k)]["orgHp"] = m_orgHp;
+    output[std::to_string(k)]["attack"] = m_attack;
+    output[std::to_string(k)]["orgAttack"] = m_orgAttack;
+    output[std::to_string(k)]["owner"] = m_owner;
+    output[std::to_string(k)]["distance"] = m_distance;
 }

@@ -11,6 +11,7 @@
 
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+#include "json.hpp"
 
 class Entity
 {
@@ -25,6 +26,7 @@ public:
     virtual void draw(unsigned i, unsigned j, sf::Texture &army, sf::RenderWindow &window) = 0;
     virtual bool move(int oldX, int oldY, int newX, int newY, Entity*** map) = 0;
     virtual bool attack(int posX, int posY, int targetX, int targetY, Entity*** map) = 0;
+    virtual void toJson(nlohmann::json &output, int k) = 0;
 protected:
     sf::RectangleShape hpBar;
     
