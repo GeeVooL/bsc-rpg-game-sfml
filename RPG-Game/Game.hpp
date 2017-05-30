@@ -31,6 +31,7 @@ namespace global
     extern const bool ORANGE;
     extern unsigned greenAmount;
     extern unsigned orangeAmount;
+    extern int errorFlag;
 }
 
 class Game
@@ -40,10 +41,12 @@ public:
     ~Game();
     void run();
     void save();
-    void load();
+    void load(std::string fileName);
 private:
     void render(sf::RenderWindow &window);
     void renderWinner(sf::RenderWindow &window, bool winner);
+    void renderErrorLoad(sf::RenderWindow &window);
+    void renderErrorSave(sf::RenderWindow &window);
     
     void drawBackground(sf::RenderWindow &window);
     void drawFields(sf::RenderWindow &window);

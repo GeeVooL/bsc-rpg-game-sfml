@@ -15,6 +15,7 @@ const bool global::GREEN = 1;
 const bool global::ORANGE = 0;
 unsigned global::greenAmount = 0;
 unsigned global::orangeAmount = 0;
+int global::errorFlag = 0;
 
 Entity*** map = nullptr;
 
@@ -173,11 +174,25 @@ void Game::run()
             {
                 if(event.key.code == sf::Keyboard::S)
                 {
-                    save();
+                    try
+                    {
+                        save();
+                    }
+                    catch(...)
+                    {
+                        global::errorFlag = 2;
+                    }
                 }
                 else if (event.key.code == sf::Keyboard::L)
                 {
-                    load();
+                    try
+                    {
+                        load("save.json");
+                    }
+                    catch(...)
+                    {
+                        global::errorFlag = 1;
+                    }
                 }
             }
         }
@@ -186,7 +201,15 @@ void Game::run()
         window.clear();
         
         // Render scene
-        if(global::greenAmount == 0)
+        if(global::errorFlag == 1)
+        {
+            renderErrorLoad(window);
+        }
+        else if (global::errorFlag == 2)
+        {
+            renderErrorSave(window);
+        }
+        else if(global::greenAmount == 0)
         {
             renderWinner(window, global::ORANGE);
         }
@@ -232,6 +255,8 @@ void Game::drawMenu(sf::RenderWindow &window)
         playerTurn.setFillColor(sf::Color(255,128,0));
     else
         playerTurn.setFillColor(sf::Color(0, 200, 0));
+    
+    //TODO: Print player's state
     
     window.draw(playerTurn);
 }
@@ -336,96 +361,122 @@ void Game::save()
     file.close();
 }
 
-void Game::load()
+void Game::load(std::string fileName)
 {
-    std::fstream inStream("save.json", std::fstream::in);
-    nlohmann::json input;
-    inStream >> input;
-    inStream.close();
-    
-    for(int i = 0; i < global::size; i++)
-    {
-        for(int j = 0; j < global::size; j++)
+        std::fstream inStream(fileName, std::fstream::in);
+        nlohmann::json input;
+        inStream >> input;
+        inStream.close();
+        
+        for(int i = 0; i < global::size; i++)
         {
-            if(map[i][j] != nullptr)
+            for(int j = 0; j < global::size; j++)
             {
-                delete map[i][j];
-                map[i][j] = nullptr;
+                if(map[i][j] != nullptr)
+                {
+                    delete map[i][j];
+                    map[i][j] = nullptr;
+                }
             }
         }
-    }
-    
-    global::orangeAmount = 0;
-    global::greenAmount = 0;
-    global::size = input["size"];
-    m_turn = input["turn"];
-    m_hasAttacked = input["hasAttacked"];
-    m_hasMoved = input["hasMoved"];
-    
-    int k = 0;
-    
-    for(int i = 0; i < global::size; i++)
-    {
-        for(int j = 0; j < global::size; j++)
+        
+        global::orangeAmount = 0;
+        global::greenAmount = 0;
+        global::size = input["size"];
+        m_turn = input["turn"];
+        m_hasAttacked = input["hasAttacked"];
+        m_hasMoved = input["hasMoved"];
+        
+        int k = 0;
+        
+        for(int i = 0; i < global::size; i++)
         {
-            if(input[std::to_string(k)]["type"] == "null")
+            for(int j = 0; j < global::size; j++)
             {
-                map[i][j] = nullptr;
-            }
-            else if (input[std::to_string(k)]["type"] == "archer") {
-                map[i][j] = new ArcherEntity(
-                                             input[std::to_string(k)]["hp"],
-                                             input[std::to_string(k)]["orgHp"],
-                                             input[std::to_string(k)]["attack"],
-                                             input[std::to_string(k)]["orgAttack"],
-                                             input[std::to_string(k)]["owner"],
-                                             input[std::to_string(k)]["distance"]
-                                             );
-            }
-            else if (input[std::to_string(k)]["type"] == "warrior") {
-                map[i][j] = new WarriorEntity(
-                                              input[std::to_string(k)]["hp"],
-                                              input[std::to_string(k)]["orgHp"],
-                                              input[std::to_string(k)]["attack"],
-                                              input[std::to_string(k)]["orgAttack"],
-                                              input[std::to_string(k)]["owner"]
-                                              );
-            }
-            else if (input[std::to_string(k)]["type"] == "knight") {
-                map[i][j] = new KnightEntity(
-                                             input[std::to_string(k)]["hp"],
-                                             input[std::to_string(k)]["orgHp"],
-                                             input[std::to_string(k)]["attack"],
-                                             input[std::to_string(k)]["orgAttack"],
-                                             input[std::to_string(k)]["owner"]
-                                             );
-            }
-            else if (input[std::to_string(k)]["type"] == "mage") {
-                map[i][j] = new MageEntity(
-                                           input[std::to_string(k)]["hp"],
-                                           input[std::to_string(k)]["orgHp"],
-                                           input[std::to_string(k)]["attack"],
-                                           input[std::to_string(k)]["orgAttack"],
-                                           input[std::to_string(k)]["owner"],
-                                           input[std::to_string(k)]["distance"]
-                                           );
-            }
-            else if (input[std::to_string(k)]["type"] == "cavalier") {
-                map[i][j] = new CavalierEntity(
+                if(input[std::to_string(k)]["type"] == "null")
+                {
+                    map[i][j] = nullptr;
+                }
+                else if (input[std::to_string(k)]["type"] == "archer") {
+                    map[i][j] = new ArcherEntity(
+                                                 input[std::to_string(k)]["hp"],
+                                                 input[std::to_string(k)]["orgHp"],
+                                                 input[std::to_string(k)]["attack"],
+                                                 input[std::to_string(k)]["orgAttack"],
+                                                 input[std::to_string(k)]["owner"],
+                                                 input[std::to_string(k)]["distance"]
+                                                 );
+                }
+                else if (input[std::to_string(k)]["type"] == "warrior") {
+                    map[i][j] = new WarriorEntity(
+                                                  input[std::to_string(k)]["hp"],
+                                                  input[std::to_string(k)]["orgHp"],
+                                                  input[std::to_string(k)]["attack"],
+                                                  input[std::to_string(k)]["orgAttack"],
+                                                  input[std::to_string(k)]["owner"]
+                                                  );
+                }
+                else if (input[std::to_string(k)]["type"] == "knight") {
+                    map[i][j] = new KnightEntity(
+                                                 input[std::to_string(k)]["hp"],
+                                                 input[std::to_string(k)]["orgHp"],
+                                                 input[std::to_string(k)]["attack"],
+                                                 input[std::to_string(k)]["orgAttack"],
+                                                 input[std::to_string(k)]["owner"]
+                                                 );
+                }
+                else if (input[std::to_string(k)]["type"] == "mage") {
+                    map[i][j] = new MageEntity(
                                                input[std::to_string(k)]["hp"],
                                                input[std::to_string(k)]["orgHp"],
                                                input[std::to_string(k)]["attack"],
                                                input[std::to_string(k)]["orgAttack"],
-                                               input[std::to_string(k)]["owner"]
+                                               input[std::to_string(k)]["owner"],
+                                               input[std::to_string(k)]["distance"]
                                                );
+                }
+                else if (input[std::to_string(k)]["type"] == "cavalier") {
+                    map[i][j] = new CavalierEntity(
+                                                   input[std::to_string(k)]["hp"],
+                                                   input[std::to_string(k)]["orgHp"],
+                                                   input[std::to_string(k)]["attack"],
+                                                   input[std::to_string(k)]["orgAttack"],
+                                                   input[std::to_string(k)]["owner"]
+                                                   );
+                }
+                k++;
             }
-            else
-            {
-                throw 3;
-            }
-            k++;
         }
-    }
-    
-    inStream.close();
+        
+        inStream.close();
+}
+
+void Game::renderErrorLoad(sf::RenderWindow &window)
+{
+    sf::Font font;
+    font.loadFromFile(resourcePath() + "sansation.ttf");
+    sf::Text errorMsg;
+    errorMsg.setFont(font);
+    errorMsg.setCharacterSize(32);
+    errorMsg.setFillColor(sf::Color(255,255,255));
+    errorMsg.setString("Loading error");
+    sf::FloatRect textRect = errorMsg.getLocalBounds();
+    errorMsg.setOrigin(textRect.width / 2.0f, textRect.height / 2.0f);
+    errorMsg.setPosition(global::W_WIDTH / 2.0f, global::W_HEIGHT / 2.0f);
+    window.draw(errorMsg);
+}
+
+void Game::renderErrorSave(sf::RenderWindow &window)
+{
+    sf::Font font;
+    font.loadFromFile(resourcePath() + "sansation.ttf");
+    sf::Text errorMsg;
+    errorMsg.setFont(font);
+    errorMsg.setCharacterSize(32);
+    errorMsg.setFillColor(sf::Color(255,255,255));
+    errorMsg.setString("Saving error");
+    sf::FloatRect textRect = errorMsg.getLocalBounds();
+    errorMsg.setOrigin(textRect.width / 2.0f, textRect.height / 2.0f);
+    errorMsg.setPosition(global::W_WIDTH / 2.0f, global::W_HEIGHT / 2.0f);
+    window.draw(errorMsg);
 }
